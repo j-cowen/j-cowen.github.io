@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Jenna Cowen | Portfolio</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<header id="header">
+		<div class="inner">
+			<a href="/index.html" class="image avatar"><img src="/images/avatar.jpg" alt="" /></a>
+
+			<h1><strong>I am Strata</strong>, a super simple<br />
+				responsive site template freebie<br />
+				crafted by <a href="http://html5up.net">HTML5 UP</a>.</h1>
+		</div>
+	</header>
+
+	<!-- Main -->
+	<div id="main">
+		<section>
+			<div class="project-links">
+				<a href="/index.html">
+					<i class="icon solid fa-angle-left"></i>
+					<span style="padding-left: 0.4em;">Back</span>
+				</a>
+				<a href="https://github.com/j-cowen/portfolio-projects/tree/main/exceling-in-data-harmony">
+					<i class="icon brands fa-github"></i>
+					<span style="padding-left: 0.4em;">Source code</span>
+				</a>
+			</div>
+
+			<h1 style="margin-top: 0.5em;">Excel-ing in Data Harmony for an Office Supply Chain</h1>
+
+			<h2>Project summary</h2>
+
+			<p>A project that utilizes Excel to clean messy data for an office supply chain. The refined data is subsequently
+				used to construct pivot tables to facilitate efficient data analysis. The outcomes of this analysis are then
+				showcased in an interactive Excel dashboard. Skills used include VLOOKUP, INDEX MATCH, RANDARRAY, SEQUENCE,
+				aggregate functions, pivot tables, charts, and slicers.</p>
+
+			<h2>Skills used</h2>
+			<ul>
+				<li>VLOOKUP, INDEX MATCH, RANDARRAY, SEQUENCE, and aggregate functions.</li>
+				<li>Tabular Pivot Tables to create new source data.</li>
+				<li>Pivot bar charts, column charts, tree maps, and choropleth maps, combined with slicers to enhance
+					interactivity in the dashboard.</li>
+			</ul>
+
+			<h2>Data sources</h2>
+			<span>Customer / Account data:</span>
+			<ul>
+				<li>Sourced using ChatGPT.</li>
+				<li>Prior to commencing this portfolio project, I had completed a comprehensive data cleaning project at work. I
+					felt that the dataset's format was an excellent example to showcase my skills, so I enlisted ChatGPT's help to
+					generate synthetic data in the same format.</li>
+			</ul>
+
+			<span>Sales data:</span>
+			<ul>
+				<li>Sourced from <a href="https://www.kaggle.com/datasets/fehmifratpolat/sales-data">Kaggle</a> in a clean
+					format. </li>
+				<li>All customer detail was removed from the dataset. To link the Sales data from Kaggle to the Customer /
+					Account data from Chat GPT, I used RANDARRAY to apply a Customer Number to each sales transaction.</li>
+			</ul>
+
+			<h2>Project goal</h2>
+			<p>Create an interactive dashboard to examine historical sales trends spanning multiple years. The dashboard
+				should feature key metrics such as sales, profit, number of orders, and profit margin. Additionally, it should
+				provide a clear visualization of sales distribution based on region and category, offering valuable insights
+				into the geographical and product-specific sources of revenue.</p>
+
+			<h2>Steps</h2>
+			<h4>Step 1: Customer / Account data quality observations</h4>
+			<ol type="A">
+				<li>Each row represents a unique account, with data consolidated into a single cell and separated using a '|'
+					delimiter.</li>
+				<li>Extra spaces across the entire dataset.</li>
+				<li>Improper case and spelling errors in Shipping City, State, and Country. Inconsistent references (full word
+					vs. two-digit code) and occasional null values in Shipping State and Country fields. Shipping Region column is
+					missing.</li>
+				<li>Names and email of up to four people are spread across multiple columns within a single row. </li>
+				<li>Inconsistent data types within columns (i.e. account number is a mix of text and number format).</li>
+			</ol>
+
+			<h4>Step 2A: Converting Customer / Account data into table format</h4>
+			<ul>
+				<li>Selected all data within the "Raw_customer_data" worksheet and used the "Text to Columns" Wizard to split
+					the values across columns based on the '|' delimiter.</li>
+				<li>Converted the data into a table.</li>
+				<li>The "Customer_cleaning_pt_1" worksheet shows the Customer / Account data in table format.</li>
+			</ul>
+
+			<h4>Step 2B: Removing extra spaces</h4>
+			<ul>
+				<li>Within the "Customer_cleaning_pt_1" worksheet, applied TRIM(CLEAN()) to the entire dataset to remove extra
+					spaces and potential line breaks and non-printable characters.</li>
+			</ul>
+
+			<h4>Step 2C: Cleaning shipping address fields</h4>
+			<ul>
+				<li>Performed the following for each shipping address column:
+					<ul>
+						<li>Within the "Pivot_tables_shipping_address" worksheet, created a pivot table to consolidate the various
+							spelling discrepancies.</li>
+						<li>In the adjacent column to the pivot table, entered the refined version of the field, ensuring it was
+							free
+							of spelling errors and written in full City/State/Country format.</li>
+						<li>Within the "Customer_cleaning_pt_1" worksheet, created new Shipping City, State, and Country columns to
+							house the cleaned shipping data.</li>
+						<li>Used VLOOKUPS to populate the new columns with the cleaned data.</li>
+					</ul>
+				</li>
+				<li>Populated all null values within the Shipping State and Country columns, using City as a guide.</li>
+				<li>Created a new column to house the Shipping Region. Populated the column using a VLOOKUP that referenced a
+					table of all States and their associated Region.</li>
+				<li>Duplicated the "Customer_cleaning_pt_1" worksheet and named it "Customer_account_data_CLEAN". Removed the
+					old Shipping City, State, and Country columns.</li>
+			</ul>
+
+			<h4>Step 2D: Shifting all details for Person 1/2/3 from columns to individual rows</h4>
+			<ul>
+				<li>Within the "Pivot_tables_customer_1_2_3" worksheet, created tabular pivot tables for Person 1/2/3, mirroring
+					the first 11 columns of the Contact / Account table.</li>
+				<li>Appended all data from these pivot tables to the table in the "Customer_account_data_CLEAN" worksheet.</li>
+				<li>Deleted the superfluous columns housing name and email for Person 1/2/3.</li>
+				<li>Identified and eliminated duplicate email addresses using the highlight duplicates conditional formatting
+					tool.</li>
+				<li>Created a new column called "Customer Number", then applied a surrogate key to each row using SEQUENCE.</li>
+			</ul>
+
+			<h4>Step 2E: Applying consistent data types to each column</h4>
+			<ul>
+				<li>Applied "Number" data type to the "Customer Number" column.</li>
+				<li>Applied "Text" data type to all other columns.</li>
+				<li>The Contacts / Accounts data is now clean.</li>
+			</ul>
+
+			<h4>Step 3: Joining the Customer / Account data table with the Sales data table</h4>
+			<ul>
+				<li>Within the Sales data table in the "Transaction_data_CLEAN" worksheet, created a new column called "Customer
+					Number". Used RANDARRAY to apply a Customer Number from the Customer / Account data to each sales transaction.
+					This represents the person who submitted the online order.</li>
+				<li>Duplicated the "Transaction_data_CLEAN" worksheet and named it "Combined_source_data_FINAL". Created
+					placeholder columns for all customer data associated with the Customer Number (e.g. name, email, account,
+					etc).</li>
+				<li>Using Customer Number as the common key, employed INDEX MATCH to populate customer details in the Sales data
+					table, emulating a LEFT JOIN with the Customer / Account data table.</li>
+			</ul>
+
+			<h4>Step 4: Creating the dashboard</h4>
+			<p>Based on the project goal, I understood that the dashboard should highlight sales, profit, order count, and
+				profit margin over time, categorized by region and category.</p>
+
+			<p>First I sketched out a wireframe of the dashboard to understand how each element could fit together. Then I
+				began to create each dashboard element one by one. My exposure to dynamic arrays was quite limited at that point
+				in time, so I chose to build the dashboard off pivot tables, pivot charts, and slicers.</p>
+
+			<p>For the final touch I applied formatting to the dashboard, ensuring that I used complimentary colors and subtle
+				contrast to improve readability.</p>
+
+			<h2>Insights</h2>
+			<ul>
+				<li>Total Profit, Profit Margin, and Number of Orders exhibit annual increases, signaling a positive outlook for
+					the future of Essential Office Supplies. Additionally, Q4 continues to experience higher sales compared to
+					Q1-Q3 year on year.</li>
+
+				<li>The Technology category leads in sales for three out of four years, with the Phones subcategory making the
+					most significant contribution each year. Nevertheless, overall sales across categories exhibit a relatively
+					even distribution annually.</li>
+
+				<li>At the state level, California and Texas consistently lead in sales each year, likely contributing to the
+					West and South regions having the highest overall sales each year as well.</li>
+
+				<li>While the top 5 products fluctuate yearly, a Canon-manufactured copier secures a position in three out of
+					four years. Collectively, these top 5 products contribute 10% - 13% to total sales each year.</li>
+			</ul>
+
+			<h2>Project reflection</h2>
+			<p>In my role at IonOpticks, I successfully completed numerous Excel data cleaning projects so I was well-versed
+				in executing steps 1 to 3 of this project.</p>
+
+			<p>My progress hit a snag when I commenced the dashboard construction phase. The concept of dynamic arrays was
+				relatively unfamiliar to me, and I found it challenging to make a choice between using dynamic arrays or pivot
+				tables to calculate the KPIs. In the end, I decided to go with the familiar terrain of pivot tables and slicers
+				for the initial iteration of the dashboard.</p>
+
+			<p>Given more time, I would have explored the use of dynamic arrays to enhance my understanding of them and to
+				better understand their strengths and weaknesses compared to pivot tables when building a dynamic dashboard.
+			</p>
+
+			<p>In the future, my intention is to recreate the same dashboard using dynamic arrays to calculate the KPIs.</p>
+		</section>
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<ul class="icons">
+				<li><a href="https://www.linkedin.com/in/jenna-cowen/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+				<li><a href="https://github.com/j-cowen" class="icon brands fa-github"><span class="label">Github</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>&copy; Jenna Cowen
+					<script type="text/JavaScript"> var theDate=new Date();document.write(theDate.getFullYear());</script>
+				</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.poptrox.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
