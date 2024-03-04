@@ -17,13 +17,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<div class="inner">
-			<a href="/index.html" class="image avatar"><img src="/images/avatar.jpg" alt="" /></a>
-
-			<h1><strong>I am Strata</strong>, a super simple<br />
-				responsive site template freebie<br />
-				crafted by <a href="http://html5up.net">HTML5 UP</a>.</h1>
-		</div>
+		<portfolio-header></portfolio-header>
 	</header>
 
 	<!-- Main -->
@@ -41,12 +35,6 @@
 			</div>
 
 			<h1 style="margin-top: 0.5em;">A Journey Through Global Deforestation</h1>
-
-			<h2>Project summary</h2>
-
-			<p>A project that leveraged SQL DQL to analyze a World Bank dataset with forest area statistics for 219 countries,
-				spanning from 1990 to 2016. Skills used include: Left Joins, Inner Joins and Self Joins, CTE's, Windows
-				Functions, Aggregate Functions, Creating Views, and CASE Expressions.</p>
 
 			<h2>Skills used</h2>
 			<ul>
@@ -76,10 +64,15 @@
 			</ol>
 
 			<h2>Steps</h2>
-			<p>Refer to the SQL file to review each question and the associated SQL DQL query.</p>
+			<p>Refer to the <a
+					href="https://github.com/j-cowen/portfolio-projects/blob/main/a-journey-through-global-deforestation/deforestation-exploration-project.sql">SQL
+					file</a> in the project repository. The file is broken down into questions and the associated SQL DQL queries.
+			</p>
 
 			<h2>Insights</h2>
-			<p>Refer to the PDF file to review a summary of the findings.</p>
+			<p>Refer to the <a
+					href="https://github.com/j-cowen/portfolio-projects/blob/main/a-journey-through-global-deforestation/deforestation-exploration.pdf">PDF
+					file</a> in the project repository to view a summary of findings.</p>
 
 			<h2>Project reflection</h2>
 			<p>This project marked the first instance where I applied all of my DQL skills simultaneously. Initially, I felt
@@ -94,18 +87,7 @@
 
 	<!-- Footer -->
 	<footer id="footer">
-		<div class="inner">
-			<ul class="icons">
-				<li><a href="https://www.linkedin.com/in/jenna-cowen/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-				<li><a href="https://github.com/j-cowen" class="icon brands fa-github"><span class="label">Github</span></a></li>
-			</ul>
-			<ul class="copyright">
-				<li>&copy; Jenna Cowen
-					<script type="text/JavaScript"> var theDate=new Date();document.write(theDate.getFullYear());</script>
-				</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
+		<portfolio-footer></portfolio-footer>
 	</footer>
 
 	<!-- Scripts -->
@@ -115,6 +97,7 @@
 	<script src="/assets/js/breakpoints.min.js"></script>
 	<script src="/assets/js/util.js"></script>
 	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/components.js"></script>
 
 </body>
 

@@ -1791,10 +1791,6 @@ input, select, textarea {
 		line-height: 1.5em;
 	}
 
-	header.major h2 {
-		font-size: 2em;
-	}
-
 	.heading h1 {
 		margin: 0.5em 0 0 0;
 	}
@@ -3161,10 +3157,6 @@ input, select, textarea {
 				text-align: center;
 			}
 
-			header.major h2 {
-				font-size: 1.35em;
-			}
-
 		/* List */
 
 			ul.labeled-icons li {
@@ -3246,4 +3238,15 @@ input, select, textarea {
 .project-links {
 	display: flex;
 	justify-content: space-between;
+}
+
+/* About me links */
+div.about-links {
+	display: flex;
+	gap: 2em;
+	cursor: default;
+}
+
+div.about-links a i{
+	padding-right: 0.5em;
 }
