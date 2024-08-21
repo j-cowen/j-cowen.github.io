@@ -1,0 +1,888 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Jenna Cowen | Portfolio</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/assets/css/prism.css" />
+	<link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<header id="header">
+		<portfolio-header></portfolio-header>
+	</header>
+
+	<!-- Main -->
+	<div id="main">
+		<section>
+			<div class="project-links">
+				<a href="/index.html">
+					<i class="icon solid fa-angle-left"></i>
+					<span style="padding-left: 0.4em;">Back</span>
+				</a>
+				<a href="https://github.com/j-cowen/portfolio-projects/tree/main/uk-youtubers-your-marketing-dream-team">
+					<i class="icon brands fa-github"></i>
+					<span style="padding-left: 0.4em;">Source code</span>
+				</a>
+			</div>
+
+			<h1 style="margin-top: 0.5em;">UK YouTubers: Your Marketing Dream Team</h1>
+
+	<!-- Table of Contents -->
+	<h2>Table of Contents</h2>
+	<ul>
+		<li><a href="#objective">Objective</a></li>
+		<li><a href="#data-source">Data source</a></li>
+		<li><a href="#overview-of-project-stages">Overview of project stages</a></li>
+		<li><a href="#stage-1-design">Stage 1 - design</a></li>
+			<ul>
+				<li><a href="#required-dashboard-components">Required dashboard components</a></li>
+				<li><a href="#dashboard-mockup">Dashboard mockup</a></li>
+				<li><a href="#required-tools">Required tools</a></li>
+			</ul>
+		<li><a href="#stage-2-development">Stage 2 - development</a></li>
+			<ul>
+				<li><a href="#pseudocode">Pseudocode</a></li>
+				<li><a href="#notes-data-exploration">Notes - data exploration</a></li>
+				<li><a href="#notes-data-cleaning">Notes - data cleaning</a></li>
+				<li><a href="#transform-the-data">Transform the data</a></li>
+				<li><a href="#create-the-sql-view">Create the SQL view</a></li>
+			</ul>
+		<li><a href="#stage-3-data-quality-testing">Stage 3 - data quality testing</a></li>
+			<ul>
+				<li><a href="#check-row-count">Check - row count</a></li>
+				<li><a href="#check-column-count">Check - column count</a></li>
+				<li><a href="#check-data-type">Check - data type</a></li>
+				<li><a href="#check-duplicate-count">Check - duplicate count</a></li>
+			</ul>
+		<li><a href="#stage-4-visualisation">Stage 4 - visualisation</a></li>
+			<ul>
+				<li><a href="#create-dax-measures">Create DAX measures</a></li>
+				<li><a href="#create-dashboard">Create dashboard in Power BI</a></li>
+			</ul>
+		<li><a href="#stage-5-analysis">Stage 5 - analysis</a></li>
+			<ul>
+				<li><a href="#findings">Findings</a></li>
+				<li><a href="#notes-&-variables">Notes & variables</a></li>
+				<li><a href="#validation-total-subscribers">Validation - total subscribers</a></li>
+				<li><a href="#validation-total-videos-uploaded">Validation - total videos uploaded</a></li>
+			</ul>
+		<li><a href="#client-recommendations">Client recommendations</a></li>
+	</ul>
+
+	<!-- Body -->
+            <i>Special thanks to @sdw-online for providing guidance on YouTube.</i>
+            <br>
+            <br>
+
+			<h2 id="objective">Objective</h2>
+			<p>The objective is to identify the top-performing UK YouTubers for marketing collaborations throughout 2024.</p>
+
+			<span><b>What are the problems?</b></span>
+            <p>Sharon, the Head of Marketing, is facing the following problems:</p>
+			<ul>
+				<li>She has found it difficult to identify top YouTube channels in the UK for marketing campaigns.</li>
+				<li>Her online research has been met with overly complicated and conflicting insights.</li>
+				<li>Calls with various third-party providers have proven to be costly and yielded underwhelming results.</li>
+				<li>The BI reporting team lacks the bandwidth to assist with this assignment.</li>
+			</ul>
+
+			<span><b>What is the solution?</b></span>
+			<p>Create a dashboard that provides insights into the top UK YouTubers in 2024. The dashboard should:</p>
+			<ul>
+				<li>List the top YouTube channels by subscribers, videos and views</li>
+				<li>Display key metrics (channel name, subscribers, videos, views, engagement ratios)</li>
+				<li>Be user-friendly and easy to filter/sort </li>
+			</ul>
+
+			<p>This will help the marketing team make informed decisions about which YouTubers to collaborate with for their marketing campaigns.</p>
+
+			<span><b>User story</b></span>
+			<p>As the Head of Marketing, I need a dashboard to analyze the potential for successful campaigns with top YouTubers to maximize ROI.</p>
+			<p>This dashboard should enable me to identify top-performing channels based on metrics such as subscriber count and average views.</p>
+			<p>With this information, I can make informed decisions about which YouTubers to collaborate with, thereby maximizing the effectiveness of each marketing campaign.</p>
+
+			<h2 id="data-source">Data source</h2>
+			<span><b>What data is needed to achieve our objective?</b></span>
+			<p>To produce the required information, we need data on the top UK YouTubers in 2024. The dataset should include the following fields:</p>
+			<ul>
+				<li>Channel name (string)</li>
+				<li>Total subscribers (integer)</li>
+				<li>Total videos uploaded (integer)</li>
+				<li>Total views (integer)</li>
+			</ul>
+
+			<p>We'll focus on the top 100 Youtubers for simplicity's sake.</p>
+
+			<span><b>Where is the data coming from?</b></span>
+			<p>The data is sourced from <a href="https://www.kaggle.com/datasets/bhavyadhingra00020/top-100-social-media-influencers-2024-countrywise?resource=download" target="_blank">Kaggle</a>.</p>
+
+			<h2 id="overview-of-project-stages">Overview of project stages</h2>
+			<ol>
+				<li>Design</li>
+				<li>Development</li>
+				<li>Data quality testing</li>
+				<li>Visualisation</li>
+				<li>Analysis</li>
+			</ol>
+
+			<h2 id="stage-1-design">Stage 1 - Design</h2>
+			<h4 id="required-dashboard-components">Required dashboard components</h4>
+			<span><b>What should the dashboard contain based on the requirements provided?</b></span>
+			<p>To determine what the dashboard should include, we need to address the following questions:</p>
+			<ol>
+				<li>Who are the top 10 YouTubers with the most subscribers?</li>
+				<li>Which 3 channels have uploaded the most videos?</li>
+				<li>Which 3 channels have the highest total views?</li>
+				<li>Which 3 channels have the highest average views per video?</li>
+				<li>Which 3 channels have the highest views per subscriber ratio?</li>
+				<li>Which 3 channels have the highest subscriber engagement rate per video uploaded?</li>
+			</ol>
+			<p>These questions are a starting point and may evolve as our analysis progresses.</p>
+
+			<h4 id="dashboard-mockup">Dashboard mockup</h4>
+			<span><b>What should the dashboard look like?</b></span>
+			<p>Some of the data visuals that may be appropriate in answering our questions include:</p>
+			<ul>
+				<li>Table</li>
+				<li>Treemap</li>
+				<li>Scorecards</li>
+				<li>Horizontal bar chart</li>
+			</ul>
+			<span>The following mockup was created using mokkup.ai:</span>
+
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/mockup.png" style="width:100%" alt="This is picture of the dashboard mockup." />
+				<p style="font-size: 0.8em;">Dashboard mockup created on mokkup.ai</p>
+			</div>
+
+			<h4 id="required-tools">Required tools</h4>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 20%;">Tool</th>
+				<th style="width: 60%;">Purpose</th>
+				</tr>
+				<tr>
+				<td>Mokkup AI</td>
+				<td>Designing the wireframe/mockup of the dashboard</td>
+				</tr>
+				<tr>
+				<td>Excel</td>
+				<td>Exploring the data</td>
+				</tr>
+				<tr>
+				<td>MS SQL Server</td>
+				<td>Cleaning, testing, and analyzing the data</td>
+				</tr>
+				<tr>
+				<td>Power BI</td>
+				<td>Visualizing the data via interactive dashboards</td>
+				</tr>
+				<tr>
+				<td>GitHub</td>
+				<td>Hosting the project documentation and version control</td>
+				</tr>
+			</table>
+
+			<br>
+
+			<h2 id="stage-2-development">Stage 2 - Development</h2>
+			<h4 id="pseudocode">Pseudocode</h4>
+			<span><b>What is the general approach to deliver this project?</b></span>
+			<ol>
+				<li>Get the data</li>
+				<li>Explore the data in Excel</li>
+				<li>Load the data into MS SQL Server</li>
+				<li>Clean the data with SQL</li>
+				<li>Test the data with SQL</li>
+				<li>Visualize the data in Power BI</li>
+				<li>Generate the findings based on the insights</li>
+				<li>Write the documentation + provide client recommendations</li>
+				<li>Publish the data to portfolio</li>
+			</ol>
+
+			<h4 id="notes-data-exploration">Notes - data exploration</h4>
+			<span><b>What are your initial observations of this dataset in Excel?</b></span>
+			<ul>
+				<li>Many column names are in Spanish.</li>
+				<li>The YouTube channel name is combined with the YouTube handle within one column. Both are separated by a “ @” delimiter.</li>
+				<li>The last three columns of data include the total subscribers, total views, and total videos. This encompasses all the data that we'll need to create the dashboard.</li>
+				<li>All other superfluous columns can be removed.</li>
+			</ul>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team\uncleaned-data.png" style="width:100%" alt="This is picture of the raw data." />
+				<p style="font-size: 0.8em;">Raw data from Kaggle.</p>
+			</div>
+
+			<h4 id="notes-data-cleaning">Notes - data cleaning</h4>
+			<span><b>What do we expect the clean data to look like?</b></span>
+			<p>After cleaning the data with SQL, it should meet the following criteria and constraints:</p>
+			<ul>
+				<li>Only relevant columns should be retained.</li>
+				<li>Column names should be renamed with appropriate aliases.</li>
+				<li>All data types should be appropriate for the contents of each column.</li>
+					<ul>
+						<li>Channel name = VARCHAR</li>
+						<li>Total subscribers = INTEGER</li>
+						<li>Total views = INTEGER</li>
+						<li>Total videos = INTEGER</li>
+					</ul>
+				<li>No column should contain null values, indicating complete data for all records.</li>
+				<li>There should be a total of 100 rows, representing the top 100 UK YouTubers in 2024.</li>
+			</ul>
+			<h4 id="transform-the-data">Transform the data</h4>
+			<span>The following query was run to transform the data:</span>
+			
+            <pre><code class="language-sql">-- Select the relevant columns.
+-- Rename first column with appropriate alias (not necessary for all other columns).
+-- Remove the YouTube handle from column_name, so that only the YouTube channel name remains.
+                
+SELECT
+    SUBSTRING(NOMBRE, 1, CHARINDEX('@', NOMBRE) - 1) AS channel_name,
+    total_subscribers,
+    total_views,
+    total_videos
+FROM top_uk_youtubers_2024</code></pre>
+
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/transformed-data.png" style="width:85%" alt="This is picture of the transformed data." />
+				<p style="font-size: 0.8em;">Transformed data</p>
+			</div>
+
+			<h4 id="create-the-sql-view">Create the SQL view</h4>
+			<span>The following query was run to create the SQL view:</span>
+			
+            <pre><code class="language-sql">-- Create a SQL view to store the transformed data
+
+CREATE VIEW view_top_uk_youtubers_2024
+AS
+SELECT
+    SUBSTRING(NOMBRE, 1, CHARINDEX('@', NOMBRE) - 1) AS channel_name,
+    total_subscribers,
+    total_views,
+    total_videos
+FROM top_uk_youtubers_2024</code></pre>
+
+			<h2 id="stage-3-data-quality-testing">Stage 3 - Data quality testing</h2>
+			<span><b>What data quality tests do we need to perform?</b></span>
+			<ul>
+				<li>Row count check: there should be 100 total rows, representing the top 100 UK YouTubers in 2024.</li>
+				<li>Column count check: there should be 4 total columns.</li>
+				<li>Data type check: all data types should be appropriate for the contents of each column.</li>
+					<ul>
+						<li>Channel name = VARCHAR</li>
+						<li>Total subscribers = INTEGER</li>
+						<li>Total views = INTEGER</li>
+						<li>Total videos = INTEGER</li>
+					</ul>
+				<li>Duplicate count check: there should not be any duplicate channel_names.</li>
+			</ul>
+
+            <p>These data quality tests will be performed with SQL.</p>
+			
+			<h4 id="check-row-count">Check - row count</h4>
+            <pre><code class="language-sql">-- There should only be 100 rows, representing the top 100 UK YouTubers in 2024.
+
+SELECT COUNT(*)
+FROM view_top_uk_youtubers_2</code></pre>
+
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-row-count.png" style="width:25%" alt="This is picture of the row count check output." />
+				<p style="font-size: 0.8em;">Row count check</p>
+			</div>
+
+			<h4 id="check-column-count">Check - column count</h4>
+            <pre><code class="language-sql">-- There should only be 4 columns.
+
+SELECT COUNT(*) AS column_count
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'view_top_uk_youtubers_2024'</code></pre>
+			
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-column-count.png" style="width:23%" alt="This is picture of the column count check output." />
+				<p style="font-size: 0.8em;">Column count check</p>
+			</div>
+						
+			<h4 id="check-data-type">Check - data type</h4>
+            <pre><code class="language-sql">-- Review table structure.
+
+SELECT 
+    COLUMN_NAME, 
+    DATA_TYPE, 
+    CHARACTER_MAXIMUM_LENGTH
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'view_top_uk_youtubers_2024'</code></pre>
+						
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-data-type.png" style="width:72%" alt="This is picture of the data type check output." />
+				<p style="font-size: 0.8em;">Data type check</p>
+			</div>	
+						
+			<h4 id="check-duplicate-count">Check - duplicate count</h4>
+            <pre><code class="language-sql">-- There should not be any duplicate channel_name
+
+SELECT channel_name, COUNT(*)
+FROM view_top_uk_youtubers_2024
+GROUP BY channel_name
+HAVING COUNT(*) > 1</code></pre>
+						
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-duplicate-count.png" style="width:38%" alt="This is picture of the duplicate count check output." />
+				<p style="font-size: 0.8em;">Duplicate count check</p>
+			</div>	
+
+			<h2 id="stage-4-visualisation">Stage 4 - Visualisation</h2>
+			<h4 id="create-dax-measures">Create DAX measures (6 total)</h4>
+			<span><b>Total Views (B)</b></span>
+            <pre><code class="language-sql">-- Total Views (B)
+
+Total Views (B) = 
+
+VAR billion = 1000000000
+VAR sumOfViews = SUM(view_top_uk_youtubers_2024[total_views])
+VAR totalViews = DIVIDE(sumOfViews,billion)
+
+RETURN totalViews</code></pre>
+		
+			<span><b>Total Videos</b></span>
+            <pre><code class="language-sql">-- Total Videos
+
+Total Videos = 
+
+VAR totalVideos = SUM(view_top_uk_youtubers_2024[total_videos])
+
+RETURN totalVideos</code></pre>
+
+			<span><b>Total Subscribers (M)</b></span>
+            <pre><code class="language-sql">-- Total Subscribers (M)
+
+Total Subscribers (M) = 
+
+VAR million = 1000000
+VAR sumOfSubscribers = SUM(view_top_uk_youtubers_2024[total_subscribers])
+VAR totalSubscribers = DIVIDE(sumOfSubscribers,million)
+
+RETURN totalSubscribers</code></pre>
+
+			<span><b>Avg Views per Video (M)</b></span>
+            <pre><code class="language-sql">-- Avg Views per Video (M)
+
+Avg Views per Video (M) = 
+
+VAR million = 1000000
+VAR sumOfTotalViews = SUM(view_top_uk_youtubers_2024[total_views])
+VAR sumOfTotalVideos = SUM(view_top_uk_youtubers_2024[total_videos])
+VAR avgOfViewsPerVideo = DIVIDE(sumOfTotalViews,sumOfTotalVideos,BLANK())
+VAR finalAvgViewsPerVideo = DIVIDE(avgOfViewsPerVideo, million, BLANK())
+
+RETURN finalAvgViewsPerVideo</code></pre>
+
+			<span><b>Subscriber Engagement Rate</b></span>
+            <pre><code class="language-sql">-- Subscriber Engagement Rate
+
+Subscriber Engagement Rate = 
+
+VAR sumOfTotalSubscribers = SUM(view_top_uk_youtubers_2024[total_subscribers])
+VAR sumOfTotalVideos = SUM(view_top_uk_youtubers_2024[total_videos])
+VAR subscriberEngagementRate = DIVIDE(sumOfTotalSubscribers, sumOfTotalVideos, BLANK())
+
+RETURN subscriberEngagementRate</code></pre>
+
+			<span><b>Views per Subscriber</b></span>
+            <pre><code class="language-sql">Views per Subscriber = 
+
+VAR sumOfTotalViews = SUM(view_top_uk_youtubers_2024[total_views])
+VAR sumOfTotalSubscribers = SUM(view_top_uk_youtubers_2024[total_subscribers])
+VAR viewsPerSubscriber = DIVIDE(sumOfTotalViews, sumOfTotalSubscribers, BLANK())
+
+RETURN viewsPerSubscriber</code></pre>
+
+			<h4 id="create-dashboard">Create dashboard in Power BI</h4>
+			<span>The final result of the interactive dashboard:</span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/final-dashboard.png" style="width:100%" alt="This is picture of the Power BI dashboard." />
+				<p style="font-size: 0.8em;">Interactive dashboard in Power BI</p>
+			</div>	
+
+			<h2 id="stage-5-analysis">Stage 5 - Analysis</h2>
+			<h4 id="findings">Findings</h4>
+			<p>Findings will be based on the data in the dashboard. For this analysis, we will revisit the questions outlined in Stage 1 - Design.</p>
+			<ol>
+				<li>Who are the top 10 YouTubers with the most subscribers?</li>
+				<li>Which 3 channels have uploaded the most videos?</li>
+				<li>Which 3 channels have the highest total views?</li>
+				<li>Which 3 channels have the highest average views per video?</li>
+				<li>Which 3 channels have the highest views per subscriber ratio?</li>
+				<li>Which 3 channels have the highest subscriber engagement rate per video uploaded?</li>
+			</ol>
+
+			<span><b>1. Who are the top 10 YouTubers with the most subscribers?</b></span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+					<th style="width: 20%;">Rank</th>
+					<th style="width: 40%;">Channel Name</th>
+					<th style="width: 40%;">Subscribers (M)</th>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>NoCopyrightSounds</td>
+				<td>33.60</td>
+				</tr>
+				<tr>
+				<td>2</td>
+				<td>DanTDM</td>
+				<td>28.60</td>
+				</tr>
+				<tr>
+				<td>3</td>
+				<td>Dan Rhodes</td>
+				<td>26.50</td>
+				</tr>
+				<tr>
+				<td>4</td>
+				<td>Miss Katy</td>
+				<td>24.50</td>
+				</tr>
+				<tr>
+				<td>5</td>
+				<td>Mister Max</td>
+				<td>24.40</td>
+				</tr>
+				<tr>
+				<td>6</td>
+				<td>KSI</td>
+				<td>24.10</td>
+				</tr>
+				<tr>
+				<td>7</td>
+				<td>Jelly</td>
+				<td>23.50</td>
+				</tr>
+				<tr>
+				<td>8</td>
+				<td>Dua Lipa</td>
+				<td>23.30</td>
+				</tr>
+				<tr>
+				<td>9</td>
+				<td>Sidemen</td>
+				<td>21.00</td>
+				</tr>
+				<tr>
+				<td>10</td>
+				<td>Ali-A</td>
+				<td>18.90</td>
+				</tr>
+			</table>
+
+			<br>
+
+			<span><b>2. Which 3 channels have uploaded the most videos?</b></span>
+            <br>
+            <span><i>Note: news channels have been excluded from the list below.</i></span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 20%;">Rank</th>
+				<th style="width: 40%;">Channel Name</th>
+				<th style="width: 40%;">Videos Uploaded</th>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>GRM Daily</td>
+				<td>14,696</td>
+				</tr>
+				<tr>
+				<td>2</td>
+				<td>Man City</td>
+				<td>8,248</td>
+				</tr>
+				<tr>
+				<td>3</td>
+				<td>YOGSCAST Lewis & Simon</td>
+				<td>6,435</td>
+				</tr>
+			</table>
+			
+			<br>
+
+			<span><b>3. Which 3 channels have the most views?</b></span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 20%;">Rank</th>
+				<th style="width: 40%;">Channel Name</th>
+				<th style="width: 40%;">Total Views (B)</th>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>DanTDM</td>
+				<td>19.78</td>
+				</tr>
+				<tr>
+				<td>2</td>
+				<td>Dan Rhodes</td>
+				<td>18.56</td>
+				</tr>
+				<tr>
+				<td>3</td>
+				<td>Mister Max</td>
+				<td>15.97</td>
+				</tr>
+			</table>
+
+			<br>
+
+			<span><b>4. Which 3 channels have the highest average views per video?</b></span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 20%;">Rank</th>
+				<th style="width: 40%;">Channel Name</th>
+				<th style="width: 40%;">Average Views per Video (M)</th>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>Mark Ronson</td>
+				<td>32.27</td>
+				</tr>
+				<tr>
+				<td>2</td>
+				<td>Jessie J</td>
+				<td>5.97</td>
+				</tr>
+				<tr>
+				<td>3</td>
+				<td>Dua Lipa</td>
+				<td>5.76</td>
+				</tr>
+			</table>
+
+			<br>
+			
+			<span><b>5. Which 3 channels have the highest views per subscriber ratio?</b></span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 20%;">Rank</th>
+				<th style="width: 40%;">Channel Name</th>
+				<th style="width: 40%;">Views per Subscriber</th>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>GRM Daily</td>
+				<td>1,186</td>
+				</tr>
+				<tr>
+				<td>2</td>
+				<td>Nickelodeon</td>
+				<td>1,061</td>
+				</tr>
+				<tr>
+				<td>3</td>
+				<td>Disney Junior UK</td>
+				<td>1,032</td>
+				</tr>
+			</table>
+
+			<br>
+						
+			<span><b>6. Which 3 channels have the highest subscriber engagement rate per video uploaded?</b></span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 20%;">Rank</th>
+				<th style="width: 40%;">Channel Name</th>
+				<th style="width: 40%;">Subscriber Engagement Rate</th>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>Mark Ronson</td>
+				<td>343,000</td>
+				</tr>
+				<tr>
+				<td>2</td>
+				<td>Jessie J</td>
+				<td>110,417</td>
+				</tr>
+				<tr>
+				<td>3</td>
+				<td>Dua Lipa</td>
+				<td>104,955</td>
+				</tr>
+			</table>	
+
+			<br>
+	
+			<h4 id="notes-&-variables">Notes & variables</h4>	
+			<span>In the analysis stage, we will focus on key metrics crucial for generating the expected ROI for our client:</span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 40%;">Key Metric</th>
+				<th style="width: 60%;">Marketing Idea</th>
+				</tr>
+				<tr>
+				<td>Total subscribers</td>
+				<td>Create a single video promoting the product.</td>
+				</tr>
+				<tr>
+				<td>Total videos uploaded</td>
+				<td>Create a sponsored video series for the product.</td>
+				</tr>
+			</table>	
+
+			<br>
+
+			<p>The top 3 from both categories listed above will be pulled from the dashboard, and ROI calculations will be performed in Excel (a summary of calculations will be captured below). Subsequently, SQL queries will be run in the database to confirm that they match the output in Excel. </p>
+			<span>To perform our analysis, we will assume the following variables:</span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 25%;">Name</th>
+				<th style="width: 20%;">Variable</th>
+				<th style="width: 55%;">Description</th>
+				</tr>
+				<tr>
+				<td>Conversion rate</td>
+				<td>2%</td>
+				<td>The number of people who purchase the product advertised by the YouTuber.</td>
+				</tr>
+				<tr>
+				<td>Product cost</td>
+				<td>$5</td>
+				<td>The cost of the product that the YouTuber is advertising.</td>
+				</tr>
+			</table>	
+
+			<br>
+
+			<h4 id="validation-total-subscribers">Validation - total subscribers</h4>
+			<p>Marketing idea: create a single video promoting the product.</p>
+            <span>Top 3 YouTubers based on subscribers:</span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 50%;">Channel Name</th>
+				<th style="width: 50%;">Total Subscribers (M)</th>
+				</tr>
+				<tr>
+				<td>NoCopyrightSounds</td>
+				<td>33.60</td>
+				</tr>
+				<tr>
+				<td>DanTDM</td>
+				<td>28.60</td>
+				</tr>
+				<tr>
+				<td>Dan Rhodes</td>
+				<td>26.50</td>
+				</tr>
+			</table>	
+
+			<br>
+
+			<p><b>NoCopyrightSounds</p></b>
+			<ul>
+				<li>Average views per video = 6.92M</li>
+				<li>Potential units sold per video = 6.92M views x 2% conversion rate = 138,400</li>
+				<li>Potential revenue per video = 138,400 units sold x $5 cost per unit = $692,000</li>
+				<li>Campaign cost (one-time fee) = $50,000</li>
+				<li><b>Net profit = $692,000 revenue per video - $50,000 campaign cost = $642,000</li></b>
+			</ul>
+
+			<p><b>DanTDM</b></p>
+			<ul>
+				<li>Average views per video = 5.34M views</li>
+				<li>Potential units sold per video = 5.34M views x 2% conversion rate = 106,800</li>
+				<li>Potential revenue per video = 106,800 units sold x $5 cost per unit = $534,000</li>
+				<li>Campaign cost (one-time fee) = $50,000</li>
+				<li><b>Net profit = $534,000 revenue per video - $50,000 campaign cost = $484,000</b></li>
+			</ul>
+
+			<p><b>Dan Rhodes</b></p>
+			<ul>
+				<li>Average views per video = 11.15M views</li>
+				<li>Potential units sold per video = 11.15M views x 2% conversion rate = 223,000</li>
+				<li>Potential revenue per video = 223,000 units sold x $5 cost per unit = $1,115,000</li>
+				<li>Campaign cost (one-time fee) = $50,000</li>
+				<li><b>Net profit = $1,115,000 revenue per video - $50,000 campaign cost = $1,065,000</b></li>
+			</ul>
+
+			<p><b>Best YouTuber to partner with based on subscriber count: Dan Rhodes</b></p>
+
+			<span><b>ROI calculations in Excel:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/subscriber-roi-excel.png" style="width:100%" alt="This is picture of the subscriber ROI calcuations in Excel." />
+				<p style="font-size: 0.8em;">Subscriber Count ROI - Excel</p>
+			</div>	
+
+			<span><b>ROI calculations in SQL:</b></span>
+            <pre><code class="language-sql">--Total Subscriber Analysis
+
+DECLARE @conversionRate FLOAT = 0.02;     -- The conversion rate at 2%
+
+DECLARE @productCost MONEY = 5.0;         -- The product cost at $5
+
+DECLARE @campaignCost MONEY = 50000.0;    -- The campaign cost at $50,000
+
+WITH ChannelData AS
+    (
+    SELECT 
+        channel_name,
+        total_views, 
+        total_videos,
+        total_subscribers,
+            ROUND(CAST(total_views AS FLOAT) / total_videos, -4) AS rounded_avg_views_per_video,
+            ROUND(CAST(total_views AS FLOAT) / total_videos, -4) * @conversionRate AS potential_product_sales,
+            ROUND(CAST(total_views AS FLOAT) / total_videos, -4) * @conversionRate*@productCost AS potential_revenue_per_video,
+        (ROUND(CAST(total_views AS FLOAT) / total_videos, -4) * @conversionRate*@productCost) - @campaignCost AS net_profit
+    FROM view_top_uk_youtubers_2024
+    )
+
+SELECT 
+    TOP(3) 
+    channel_name,
+    rounded_avg_views_per_video,
+    potential_product_sales,
+    potential_revenue_per_video,
+    net_profit
+FROM ChannelData
+ORDER BY total_subscribers DESC</code></pre>
+
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/subscriber-roi-sql.png" style="width:100%" alt="This is picture of the subscriber ROI output from SQL." />
+				<p style="font-size: 0.8em;">Subscriber Count ROI - SQL</p>
+			</div>	
+
+			<h4 id="validation-total-videos-uploaded">Validation - total videos uploaded</h4>
+			<p>Marketing idea: create a sponsored video series for the product. </p>
+            <span>Top 3 YouTubers based on videos uploaded:</span>
+			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+				<tr>
+				<th style="width: 50%;">Channel Name</th>
+				<th style="width: 50%;">Total Videos</th>
+				</tr>
+				<tr>
+				<td>GRM Daily</td>
+				<td>14,690</td>
+				</tr>
+				<tr>
+				<td>Man City</td>
+				<td>8,248</td>
+				</tr>
+				<tr>
+				<td>YOGSCAST Lewis & Simon</td>
+				<td>6,435</td>
+				</tr>
+			</table>	
+
+			<br>
+
+			<p><b>GRM Daily</b></p>
+			<ul>
+				<li>Average views per video = 510,000</li>
+				<li>Potential units sold per video = 510,000 views x 2% conversion rate = 10,200</li>
+				<li>Potential revenue per video = 10,200 units sold x $5 cost per unit = $51,000</li>
+				<li>Campaign cost (11-videos @ $5,000 each) = $55,000</li>
+				<li><b>Net profit = $51,000 revenue for video series - $55,000 campaign cost = -$4,000 (potential loss)</b></li>
+			</ul>
+			
+			<p><b>Manchester City</b></p>
+			<ul>
+				<li>Average views per video = 240,000</li>
+				<li>Potential units sold per video = 240,000 views x 2% conversion rate = 4,800</li>
+				<li>Potential revenue per video = 4,800 units sold x $5 cost per unit = $24,000</li>
+				<li>Campaign cost (11-videos @ $5,000 each) = $55,000</li>
+				<li><b>Net profit = $24,000 revenue for video series - $55,000 campaign cost = -$31,000 (potential loss)</b></li>
+			</ul>
+
+			<p><b>YOGSCAST Lewis & Simon</b></p>
+			<ul>
+				<li>Average views per video = 710,000</li>
+				<li>Potential units sold per video = 710,000 views x 2% conversion rate = 14,200</li>
+				<li>Potential revenue per video = 14,200 units sold x $5 cost per unit = $71,000</li>
+				<li>Campaign cost (11-videos @ $5,000 each) = $55,000</li>
+				<li><b>Net profit = $71,000 revenue for video series - $55,000 campaign cost = $16,000 (profit)</b></li>
+			</ul>
+
+			<p><b>Best YouTuber to partner with based on videos uploaded: YOGSCAST Lewis & Simon</b></p>
+			<span><b>ROI calculations in Excel:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/videos-roi-excel.png" style="width:100%" alt="This is picture of the videos uploaded ROI calcuations in Excel." />
+				<p style="font-size: 0.8em;">Videos Uploaded ROI - Excel</p>
+			</div>	
+
+			<span><b>ROI calculations in SQL:</b></span>	
+
+            <pre><code class="language-sql">--Total Videos Analysis
+
+DECLARE @conversionRate FLOAT = 0.02;           -- The conversion rate at 2%
+
+DECLARE @productCost FLOAT = 5.0;               -- The product cost at $5
+
+DECLARE @campaignCostPerVideo FLOAT = 5000.0;   -- The campaign cost per video at $5,000
+
+DECLARE @numberOfVideos INT = 11;               -- The number of videos (11)
+
+WITH ChannelData AS 
+    (
+    SELECT
+        channel_name,
+        total_views,
+        total_videos,
+        ROUND((CAST(total_views AS FLOAT) / total_videos), -4) AS rounded_avg_views_per_video
+    FROM view_top_uk_youtubers_2024
+    )
+
+SELECT
+    channel_name,
+    rounded_avg_views_per_video,
+    (rounded_avg_views_per_video * @conversionRate) AS potential_units_sold_per_video,
+    (rounded_avg_views_per_video * @conversionRate * @productCost) AS potential_revenue_per_video,
+    ((rounded_avg_views_per_video * @conversionRate * @productCost) - (@campaignCostPerVideo * @numberOfVideos)) AS net_profit
+FROM ChannelData
+WHERE channel_name IN ('GRM Daily', 'Man City', 'YOGSCAST Lewis & Simon ')
+ORDER BY net_profit DESC</code></pre>
+
+			<span><b>Output:</b></span>
+			<div class="align-center">
+				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/videos-roi-sql.png" style="width:100%" alt="This is picture of the videos uploaded ROI output from SQL." />
+				<p style="font-size: 0.8em;">Videos Uploaded ROI - SQL</p>
+			</div>	
+		
+			<h2 id="client-recommendations"> Client recommendations</h2>
+        <p><b>What recommendations do we have for the client to maximise ROI?</b></p>
+            <ul>
+                <li>In terms of visibility, NoCopyrightSounds seems ideal due to its highest number of subscribers. However, its views-per-subscriber rate is significantly lower than that of other high-subscriber channels. Despite this, <b>a single promotional video with NoCopyrightSounds could potentially yield an ROI of $642,000</b>.</li>
+                <li>Dan Rhodes is a better option for visibility. This channel not only has a high subscriber count but also a views-per-subscriber rate more than double that of NoCopyrightSounds. <b>Partnering with Dan Rhodes for a single promotional video could potentially yield an ROI of $1,065,000</b>.</li>
+                <li>While GRM Daily, Manchester City, and YOGSCAST Lewis & Simon appear to be strong candidates for a sponsored video series due to their high video upload counts, their reach is limited by low subscriber and view counts. Considering the time and effort required to produce a video series and the likely low ROI, focusing on other opportunities may be more effective.</li>
+            </ul>
+		</section>
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<portfolio-footer></portfolio-footer>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/jquery.poptrox.min.js"></script>
+	<script src="/assets/js/browser.min.js"></script>
+	<script src="/assets/js/breakpoints.min.js"></script>
+	<script src="/assets/js/util.js"></script>
+	<script src="/assets/js/prism.js"></script>
+	<script src="/assets/js/main.js"></script>
+	<script src="/assets/js/components.js"></script>
+
+</body>
+
+</html>

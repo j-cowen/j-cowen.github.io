@@ -134,6 +134,16 @@ input, select, textarea {
 		margin: 0 0 2em 0;
 	}
 
+	p:has(+ ul),
+	p:has(+ ol) {
+		margin-bottom: 1em;
+	}
+
+	ul:has(+ p),
+	ol:has(+ p) {
+		margin-bottom: 1em;
+	}
+
 	h1, h2, h3, h4, h5, h6 {
 		color: #787878;
 		font-weight: 400;
@@ -206,29 +216,16 @@ input, select, textarea {
 		padding: 0.5em 0 0.5em 1.5em;
 	}
 
-	code {
-		background: #f7f7f7;
-		border-radius: 0.35em;
-		border: solid 2px #efefef;
-		font-family: "Courier New", monospace;
+	:not(pre) > code[class*="language-"],
+	pre[class*="language-"] {
 		font-size: 0.9em;
-		margin: 0 0.25em;
-		padding: 0.25em 0.65em;
 	}
 
-	pre {
-		-webkit-overflow-scrolling: touch;
+	code[class*="language-"],
+	pre[class*="language-"] {
 		font-family: "Courier New", monospace;
-		font-size: 0.9em;
-		margin: 0 0 2em 0;
+		margin-bottom: 2em;
 	}
-
-		pre code {
-			display: block;
-			line-height: 1.75em;
-			padding: 1em 1.5em;
-			overflow-x: auto;
-		}
 
 	.align-left {
 		text-align: left;
@@ -2147,6 +2144,12 @@ input, select, textarea {
 				width: 100%;
 			}
 
+			img.center {
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			  }
+
 /* List */
 
 	ol {
@@ -2394,14 +2397,14 @@ input, select, textarea {
 			}
 
 		table td {
-			padding: 0.75em 0.75em;
+			padding: 0.5em 0.5em;
 		}
 
 		table th {
 			color: #787878;
-			font-size: 0.9em;
-			font-weight: 400;
-			padding: 0 0.75em 0.75em 0.75em;
+			font-size: 1em;
+			font-weight: 500;
+			padding: 0.5em 0.5em;
 			text-align: left;
 		}
 
