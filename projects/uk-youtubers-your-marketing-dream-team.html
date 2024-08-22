@@ -166,7 +166,7 @@
 			</div>
 
 			<h4 id="required-tools">Required tools</h4>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 20%;">Tool</th>
 				<th style="width: 60%;">Purpose</th>
@@ -254,10 +254,7 @@ SELECT
 FROM top_uk_youtubers_2024</code></pre>
 
 			<span><b>Output:</b></span>
-			<div class="align-center">
-				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/transformed-data.png" style="width:85%" alt="This is picture of the transformed data." />
-				<p style="font-size: 0.8em;">Transformed data</p>
-			</div>
+			<img class="left pad-bottom" src="/images/projects/uk-youtubers-your-marketing-dream-team/transformed-data.png" style="width:85%" alt="This is picture of the transformed data." />
 
 			<h4 id="create-the-sql-view">Create the SQL view</h4>
 			<span>The following query was run to create the SQL view:</span>
@@ -297,10 +294,7 @@ SELECT COUNT(*)
 FROM view_top_uk_youtubers_2</code></pre>
 
 			<span><b>Output:</b></span>
-			<div class="align-center">
-				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-row-count.png" style="width:25%" alt="This is picture of the row count check output." />
-				<p style="font-size: 0.8em;">Row count check</p>
-			</div>
+			<img class="left pad-bottom" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-row-count.png" style="width:25%" alt="This is picture of the row count check output." />
 
 			<h4 id="check-column-count">Check - column count</h4>
             <pre><code class="language-sql">-- There should only be 4 columns.
@@ -310,10 +304,7 @@ FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = 'view_top_uk_youtubers_2024'</code></pre>
 			
 			<span><b>Output:</b></span>
-			<div class="align-center">
-				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-column-count.png" style="width:23%" alt="This is picture of the column count check output." />
-				<p style="font-size: 0.8em;">Column count check</p>
-			</div>
+			<img class="left pad-bottom" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-column-count.png" style="width:23%" alt="This is picture of the column count check output." />
 						
 			<h4 id="check-data-type">Check - data type</h4>
             <pre><code class="language-sql">-- Review table structure.
@@ -326,10 +317,7 @@ FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = 'view_top_uk_youtubers_2024'</code></pre>
 						
 			<span><b>Output:</b></span>
-			<div class="align-center">
-				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-data-type.png" style="width:72%" alt="This is picture of the data type check output." />
-				<p style="font-size: 0.8em;">Data type check</p>
-			</div>	
+			<img class="left pad-bottom" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-data-type.png" style="width:72%" alt="This is picture of the data type check output." />
 						
 			<h4 id="check-duplicate-count">Check - duplicate count</h4>
             <pre><code class="language-sql">-- There should not be any duplicate channel_name
@@ -340,10 +328,7 @@ GROUP BY channel_name
 HAVING COUNT(*) > 1</code></pre>
 						
 			<span><b>Output:</b></span>
-			<div class="align-center">
-				<img class="center" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-duplicate-count.png" style="width:38%" alt="This is picture of the duplicate count check output." />
-				<p style="font-size: 0.8em;">Duplicate count check</p>
-			</div>	
+            <img class="left pad-bottom" src="/images/projects/uk-youtubers-your-marketing-dream-team/check-duplicate-count.png" style="width:38%" alt="This is picture of the duplicate count check output." />
 
 			<h2 id="stage-4-visualisation">Stage 4 - Visualisation</h2>
 			<h4 id="create-dax-measures">Create DAX measures (6 total)</h4>
@@ -431,7 +416,7 @@ RETURN viewsPerSubscriber</code></pre>
 			</ol>
 
 			<span><b>1. Who are the top 10 YouTubers with the most subscribers?</b></span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 					<th style="width: 20%;">Rank</th>
 					<th style="width: 40%;">Channel Name</th>
@@ -494,7 +479,7 @@ RETURN viewsPerSubscriber</code></pre>
 			<span><b>2. Which 3 channels have uploaded the most videos?</b></span>
             <br>
             <span><i>Note: news channels have been excluded from the list below.</i></span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 20%;">Rank</th>
 				<th style="width: 40%;">Channel Name</th>
@@ -520,7 +505,7 @@ RETURN viewsPerSubscriber</code></pre>
 			<br>
 
 			<span><b>3. Which 3 channels have the most views?</b></span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 20%;">Rank</th>
 				<th style="width: 40%;">Channel Name</th>
@@ -546,7 +531,7 @@ RETURN viewsPerSubscriber</code></pre>
 			<br>
 
 			<span><b>4. Which 3 channels have the highest average views per video?</b></span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 20%;">Rank</th>
 				<th style="width: 40%;">Channel Name</th>
@@ -572,7 +557,7 @@ RETURN viewsPerSubscriber</code></pre>
 			<br>
 			
 			<span><b>5. Which 3 channels have the highest views per subscriber ratio?</b></span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 20%;">Rank</th>
 				<th style="width: 40%;">Channel Name</th>
@@ -598,7 +583,7 @@ RETURN viewsPerSubscriber</code></pre>
 			<br>
 						
 			<span><b>6. Which 3 channels have the highest subscriber engagement rate per video uploaded?</b></span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 20%;">Rank</th>
 				<th style="width: 40%;">Channel Name</th>
@@ -625,7 +610,7 @@ RETURN viewsPerSubscriber</code></pre>
 	
 			<h4 id="notes-&-variables">Notes & variables</h4>	
 			<span>In the analysis stage, we will focus on key metrics crucial for generating the expected ROI for our client:</span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 40%;">Key Metric</th>
 				<th style="width: 60%;">Marketing Idea</th>
@@ -644,7 +629,7 @@ RETURN viewsPerSubscriber</code></pre>
 
 			<p>The top 3 from both categories listed above will be pulled from the dashboard, and ROI calculations will be performed in Excel (a summary of calculations will be captured below). Subsequently, SQL queries will be run in the database to confirm that they match the output in Excel. </p>
 			<span>To perform our analysis, we will assume the following variables:</span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 25%;">Name</th>
 				<th style="width: 20%;">Variable</th>
@@ -667,7 +652,7 @@ RETURN viewsPerSubscriber</code></pre>
 			<h4 id="validation-total-subscribers">Validation - total subscribers</h4>
 			<p>Marketing idea: create a single video promoting the product.</p>
             <span>Top 3 YouTubers based on subscribers:</span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 50%;">Channel Name</th>
 				<th style="width: 50%;">Total Subscribers (M)</th>
@@ -765,7 +750,7 @@ ORDER BY total_subscribers DESC</code></pre>
 			<h4 id="validation-total-videos-uploaded">Validation - total videos uploaded</h4>
 			<p>Marketing idea: create a sponsored video series for the product. </p>
             <span>Top 3 YouTubers based on videos uploaded:</span>
-			<table style="width: 80%; margin: auto; border-collapse: collapse;">
+			<table style="width: 80%; border-collapse: collapse;">
 				<tr>
 				<th style="width: 50%;">Channel Name</th>
 				<th style="width: 50%;">Total Videos</th>
